@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Marvin JS - v16.4.18</title>
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+    <script src="js/lib/jquery-1.9.1.min.js"></script>
+    <script src="gui/lib/promise-1.0.0.min.js"></script>
+    <script src="https://marvinjs.chemicalize.com/v1/988e867a067d43b987185e755630f5a6/client-settings.js"></script>
+    <script src="https://marvinjs.chemicalize.com/v1/client.js"></script>
+    <script src="js/marvinjslauncher.js"></script>
+     <script src="jawor/jaworlauncher.js"></script>
+    <script type="javascript">
+      marvinSketcherInstance = null;
+      $(document).ready(function handleDocumentReady (e) {
+      $(".index_box").click(function(){
+      var a = $(this).find("a").attr("href");
+      window.open(a);
+      });
+
+      $(".index_box").hover(function () {
+      window.status = $(this).find("a").attr("href");
+      }, function () {
+      window.status = "";
+      });
+      
+//      <!-- MarvinJSUtil.getEditor("#sketch").then(function (sketcherInstance) { -->
+//      <!-- marvinSketcherInstance = sketcherInstance; -->
+//      <!-- console.log(marvinSketcherInstance); -->
+//      <!-- }, -->
+//      <!-- function (error) { -->
+//      <!-- }); -->
+
+//      <!-- }); -->
+    </script>
+  </head>
+
+  <body class="cialo">
+    <a href="http://chemaxon.com">
+      <img src="powered_by_chemaxon_GOLD_M.png" alt="Powered by ChemAxon FreeWeb license" style="bottom:8px;width:250px;right:35px;border:0;z-index:10000;position:fixed">
+    </a>
+    <textarea type="text" class="dajSmilesa" size=150 id="wejscieUzytkownika">
+FC(F)(F)C1=CC=C(Cl)N=C1.O=C(C)C2=CC(Br)=CC=C2.[H-]>>O=C(CC3=CC=C(C=N3)C(F)(F)F)C4=CC(Br)=CC=C4.[Cl-].[HH]
+
+    </textarea>
+          <!-- C=CCOc1ccccc1>>Oc1ccccc1CC=C -->
+    <input type="submit" value="Map reaction!" id="policz"/>
+    <div class="doWyjscia">
+      <div id="informacje"></div>
+    </div>
+    <div class="doMapowan">
+      <div id="zmiany"></div>
+    </div>
+    <div class="centrewrapper" style="text-align: center">
+      <button id="zmapujRysunek">Map the drawing!</button>
+    </div>
+    <div id="dd"></div>
+    <br/>
+    <div id="sketch" class="resizable"></div>
+    <script>
+      marvinSketcherInstance = ChemicalizeMarvinJs.createEditor("#sketch").then( function(mvn) {
+      marvinSketcherInstance = mvn;
+      });
+
+    </script>
+    <script type="text/javascript">
+	'use strict';
+      var signalMapping = function() {
+              $("#policz").val("mapping reaction...");
+              $("#zmapujRysunek")[0].innerHTML = "mapping reaction...";
+      }
+      var clearMessages = function() {
+              $("#informacje")[0].innerHTML = "";
+      }
+      var finishedMapping = function() {
+              $("policz").val("Map reaction!");
+              $("zmapujRysunek").innerHTML = "Map the drawing!";
+      }
+
+      var plural = function(i) {
+              if (i > 1) {
+                      return 's';
+              } else {
+                      return '';
+              }
+      }
+
+      var podajWejscie = function() {
+              return $("#wejscieUzytkownika").val().replace(/\s/g, "");
+      };
+      var wywalPojedynczeWodory = function(smiles) {
+	      return smiles.replace(/(\.|^)[H\d\]\[\(\)=:-]*(\.|$)/g, ".")
+		      .replace(/(\.|^)[H\d\]\[\(\)=:+-]*(\.|$)/g, ".")
+		      .replace(/(\.|^)[H\d\]\[\(\)=:+-]*(\.|$)/g, ".")
+		      .replace(/(\.|^)[H\d\]\[\(\)=:+-]*(\.|$)/g, ".")
+		      .replace(/(\.|^)[H\d\]\[\(\)=:+-]*(\.|$)/g, ".")
+		      .replace(/(\.|^)[H\d\]\[\(\)=:+-]*(\.|$)/g, ".")
+		      .replace(/>>[H\d\]\[\(\):+=-]*(\.|$)/g, ">>")
+		      .replace(/(\.|^)[H\d\]\[\(\):+=-]*>>/g, ">>");
+      }
+      var odwodorujINarysuj = function(struktura_smilesowa) {
+	      var smiles = struktura_smilesowa.smiles;
+	      var info = struktura_smilesowa.zmiany;
+	      
+	      var bezWodorow = wywalPojedynczeWodory(smiles);
+	      var mrv = $.ajax({method: 'POST',
+				url: '../webservices/rest-v0/util/calculate/stringMolExport',
+				data: {
+					structure: bezWodorow,
+					parameters: "mrv"
+				}
+			       }).done(function (gotowyMrv) {
+				       $.ajax({method: 'POST',
+					       url: '../webservices/rest-v0/util/convert/hydrogenizer',
+					       contentType: "application/json",
+					       dataType: "text",
+					       data: JSON.stringify({
+						       structure: gotowyMrv,
+					       })}).done(function(odwodorowany) {
+						       marvinSketcherInstance.importStructure("MRV", odwodorowany);
+						       $("#zmiany")[0].innerHTML = info;
+					       }).fail(function(jqXHR, textStatus) {
+						       marvinSketcherInstance.importStructure("MRV", gotowyMrv);
+						       console.log("failed dehydrogenizing ", textStatus, jqXHR);
+					       });
+			       }).fail(function (jq, textStatus) {
+				       console.log("failed converting SMILES->MRV ", textStatus);
+				       marvinSketcherInstance.importStructure("SMILES", bezWodorow);
+				       $("#zmiany")[0].innerHTML = info;
+			       });
+      }
+      var narysujSmilesa = function(smiles) {
+              var processedCallback = function (solutions, messages) {
+                      if (messages.indexOf('Unix.Unix_error(Unix.ECONNREFUSED') >= 0) {
+                              messages = "Server which comptues atom-atom matching is currently offline. Please try again later.<br/>" + messages;
+                      }
+                      $("#informacje")[0].innerHTML = messages;
+                      if (solutions.length > 0) {
+                              odwodorujINarysuj(solutions[0]);
+
+                              var html = 'Choose mapping to show (' + solutions.length + ' mapping' + plural(solutions.length) + '): <select id="selekt" name="wybierz">\n';
+                              for (var i = 0; i < solutions.length; ++i) {
+                                      html += "<option value='" + JSON.stringify(solutions[i]) + "'>" + i +'</option>\n';
+                              }
+                              html += "</select>\n"
+                              $("#dd")[0].innerHTML = html;
+			      $("#selekt").on("change", function() {
+				      console.log(this.value);
+                                      odwodorujINarysuj(JSON.parse(this.value));
+                              });
+                      }
+                      finishedMapping();
+              };
+              var jawor = getJawor(smiles, processedCallback);
+              return;
+      }
+      $(document).ready(function() {
+              $("#zmapujRysunek").click(function() {
+                      signalMapping();
+                      clearMessages();
+                      marvinSketcherInstance.exportStructure("smiles").
+                              then(function(smiles) {
+                                      $("#wejscieUzytkownika").val(smiles);
+                                      narysujSmilesa(podajWejscie());
+                              },
+                                   function(blad) {
+                                           $("#informacje")[0].innerHTML = "error while processing image\n" + blad;
+                                   });
+              });
+              $("#policz").click(function() {
+                      signalMapping();
+                      clearMessages();
+                      narysujSmilesa(podajWejscie());
+              });
+      });
+    </script>
+  </body>
+</html>

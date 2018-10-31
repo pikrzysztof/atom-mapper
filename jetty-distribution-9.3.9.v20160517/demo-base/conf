@@ -1,0 +1,109 @@
+
+Java Environment:
+-----------------
+ java.home = /usr/lib/jvm/java-8-openjdk-amd64/jre
+ java.vm.vendor = Oracle Corporation
+ java.vm.version = 25.91-b14
+ java.vm.name = OpenJDK 64-Bit Server VM
+ java.vm.info = mixed mode
+ java.runtime.name = OpenJDK Runtime Environment
+ java.runtime.version = 1.8.0_91-8u91-b14-0ubuntu4~14.04-b14
+ java.io.tmpdir = /tmp
+ user.dir = /home/kp332534/jetty-distribution-9.3.9.v20160517/demo-base
+ user.language = en
+ user.country = GB
+
+Jetty Environment:
+-----------------
+ jetty.version = 9.3.9.v20160517
+ jetty.tag.version = master
+ jetty.home = /home/kp332534/jetty-distribution-9.3.9.v20160517
+ jetty.base = /home/kp332534/jetty-distribution-9.3.9.v20160517/demo-base
+
+Config Search Order:
+--------------------
+ <command-line>
+ ${jetty.base} -> /home/kp332534/jetty-distribution-9.3.9.v20160517/demo-base
+ ${jetty.home} -> /home/kp332534/jetty-distribution-9.3.9.v20160517
+
+
+JVM Arguments:
+--------------
+ (no jvm args specified)
+
+System Properties:
+------------------
+ (no system properties specified)
+
+Properties:
+-----------
+ java.version = 1.8.0_91
+ java.version.major = 1
+ java.version.minor = 8
+ java.version.revision = 0
+ java.version.update = 91
+ jetty.demo.realm = etc/realm.properties
+ jetty.jaas.login.conf = etc/login.conf
+ org.eclipse.jetty.websocket.jsr356 = false
+
+Jetty Server Classpath:
+-----------------------
+Version Information on 41 entries in the classpath.
+Note: order presented here is how they would appear on the classpath.
+      changes to the --module=name command line options will be reflected here.
+ 0:    3.10.2.v20150120-1634 | ${jetty.home}/lib/apache-jsp/org.eclipse.jdt.core.compiler.ecj-4.4.2.jar
+ 1:          9.3.9.v20160517 | ${jetty.home}/lib/apache-jsp/org.eclipse.jetty.apache-jsp-9.3.9.v20160517.jar
+ 2:                   8.0.33 | ${jetty.home}/lib/apache-jsp/org.mortbay.jasper.apache-el-8.0.33.jar
+ 3:                      2.3 | ${jetty.home}/lib/apache-jsp/org.mortbay.jasper.apache-jsp-8.0.33.jar
+ 4:                    1.2.5 | ${jetty.home}/lib/apache-jstl/org.apache.taglibs.taglibs-standard-impl-1.2.5.jar
+ 5:                    1.2.5 | ${jetty.home}/lib/apache-jstl/org.apache.taglibs.taglibs-standard-spec-1.2.5.jar
+ 6:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-client-9.3.9.v20160517.jar
+ 7:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-continuation-9.3.9.v20160517.jar
+ 8:      1.4.1.v201005082020 | ${jetty.base}/lib/ext/javax.mail.glassfish-1.4.1.v201005082020.jar
+ 9:          9.3.9.v20160517 | ${jetty.base}/lib/ext/test-mock-resources-9.3.9.v20160517.jar
+10:                    (dir) | ${jetty.base}/resources
+11:                    3.1.0 | ${jetty.home}/lib/servlet-api-3.1.jar
+12:                 3.1.0.M0 | ${jetty.home}/lib/jetty-schemas-3.1.jar
+13:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-http-9.3.9.v20160517.jar
+14:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-server-9.3.9.v20160517.jar
+15:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-xml-9.3.9.v20160517.jar
+16:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-util-9.3.9.v20160517.jar
+17:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-io-9.3.9.v20160517.jar
+18:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-jaas-9.3.9.v20160517.jar
+19:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-jndi-9.3.9.v20160517.jar
+20:      1.4.1.v201005082020 | ${jetty.home}/lib/jndi/javax.mail.glassfish-1.4.1.v201005082020.jar
+21:                      1.2 | ${jetty.home}/lib/jndi/javax.transaction-api-1.2.jar
+22:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-rewrite-9.3.9.v20160517.jar
+23:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-security-9.3.9.v20160517.jar
+24:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-servlet-9.3.9.v20160517.jar
+25:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-servlets-9.3.9.v20160517.jar
+26:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-webapp-9.3.9.v20160517.jar
+27:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-deploy-9.3.9.v20160517.jar
+28:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-plus-9.3.9.v20160517.jar
+29:          9.3.9.v20160517 | ${jetty.home}/lib/jetty-annotations-9.3.9.v20160517.jar
+30:                    5.0.1 | ${jetty.home}/lib/annotations/asm-5.0.1.jar
+31:                    5.0.1 | ${jetty.home}/lib/annotations/asm-commons-5.0.1.jar
+32:                      1.2 | ${jetty.home}/lib/annotations/javax.annotation-api-1.2.jar
+33:                      1.0 | ${jetty.home}/lib/websocket/javax.websocket-api-1.0.jar
+34:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/javax-websocket-client-impl-9.3.9.v20160517.jar
+35:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/javax-websocket-server-impl-9.3.9.v20160517.jar
+36:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/websocket-api-9.3.9.v20160517.jar
+37:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/websocket-client-9.3.9.v20160517.jar
+38:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/websocket-common-9.3.9.v20160517.jar
+39:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/websocket-server-9.3.9.v20160517.jar
+40:          9.3.9.v20160517 | ${jetty.home}/lib/websocket/websocket-servlet-9.3.9.v20160517.jar
+
+Jetty Active XMLs:
+------------------
+ ${jetty.home}/etc/jetty.xml
+ ${jetty.home}/etc/jetty-http.xml
+ ${jetty.home}/etc/jetty-jaas.xml
+ ${jetty.home}/etc/jetty-rewrite.xml
+ ${jetty.home}/etc/jetty-ssl.xml
+ ${jetty.home}/etc/jetty-ssl-context.xml
+ ${jetty.home}/etc/jetty-https.xml
+ ${jetty.home}/etc/jetty-deploy.xml
+ ${jetty.home}/etc/jetty-plus.xml
+ ${jetty.home}/etc/jetty-annotations.xml
+ #${jetty.base}/etc/demo-rewrite-rules.xml
+ #${jetty.base}/etc/test-realm.xml
