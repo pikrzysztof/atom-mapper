@@ -2,8 +2,8 @@ WARNING: the license works only if accessed through "mapper.grzybowskigroup.pl" 
 
 # Setup:
 
-1 Install Docker
-2 Decrypt license file webservices-license-encrypted.cxl with
+1. Install Docker
+2. Decrypt license file webservices-license-encrypted.cxl with
   ```
   openssl enc -d -aes-256-cbc -pbkdf2 -iter 50000 -in webservices-license-enc.cxl -out webservices-license.cxl
   ```
